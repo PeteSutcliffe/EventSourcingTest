@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventSourcingProtoType.Web.Models.Sport>
+﻿@using EventSourcingProtoType.Web.Controllers
 @{
     Layout = null;
 }
@@ -6,25 +6,101 @@
 <head>
     <Title>Test</Title>
     <style>
-        .table { display: table; } 
-        .table>* { display: table-row; }
-        .table>*>* { display: table-cell; }
+        .table {
+            display: table;
+        }
+
+            .table > * {
+                display: table-row;
+            }
+
+                .table > * > * {
+                    display: table-cell;
+                }
     </style>
 </head>
 <div>
+    <h3>Sports</h3>
     <div class="table">
-        @foreach (var sport in Model)
+        @foreach (var sport in ViewModel.Sports)
         {
             using (@Html.BeginForm(new { Action = "UpdateSport" }))
             {
-                <div><input name="Name" value="@sport.Name" /><input type="Hidden" name="Id" value="@sport.Id" /></div>
-                <div><input type="submit" value="Update"/></div>
+                <div>
+                    <input name="Name" value="@sport.Name" /><input type="Hidden" name="Id" value="@sport.Id" />
+                </div>
+                <div>
+                    <input type="submit" value="Update" />
+                </div>
             }
         }
-        @using (@Html.BeginForm(new { Action = "CreateSport"}))
+        @using (@Html.BeginForm(new { Action = "CreateSport" }))
         {
-        <div><input name="Name" value="" /></div>
-        <div><input type="submit" value="Create" /></div>
+            <div>
+                <input name="Name" value="" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        }
+    </div>
+    <h3>Competitors</h3>
+    <div class="table">
+        @foreach (var competitor in ViewModel.Competitors)
+        {
+            using (@Html.BeginForm(new { Action = "UpdateCompetitor" }))
+            {
+                <div>
+                    <input name="Name" value="@competitor.Name" /><input type="Hidden" name="Id" value="@competitor.Id" />
+                </div>
+                <div>
+                    <input type="submit" value="Update" />
+                </div>
+            }
+        }
+        @using (@Html.BeginForm(new { Action = "CreateCompetitor" }))
+        {
+            <div>
+                <input name="Name" value="" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        }
+    </div>
+
+    <h3>Fixtures</h3>
+    <div class="table">
+        @foreach (var fixture in ViewModel.Fixtures)
+        {
+            using (@Html.BeginForm(new { Action = "UpdateCompetitor" }))
+            {
+                <div>
+                    <input type="Hidden" name="Id" value="@fixture.Id" />
+                    <input name="Title" value="@fixture.Title"/>
+                    <input name="Date" value="@fixture.Date"/>
+                    @Html.DropDownList("Sport", new SelectList(ViewModel.Sports, "Id", "Name", ViewModel.Sports.Single(s => s.Id == fixture.Sport.Id)))
+                    @Html.DropDownList("Competitor1", new SelectList(ViewModel.Competitors, "Id", "Name", ViewModel.Competitors.Single(s => s.Id == fixture.Competitor1.Id).Id))
+                    @Html.DropDownList("Competitor2", new SelectList(ViewModel.Competitors, "Id", "Name", ViewModel.Competitors.Single(s => s.Id == fixture.Competitor2.Id).Id))
+                </div>
+                <div>
+                    <input type="submit" value="Update" />
+                </div>
+            }
+        }
+        @using (@Html.BeginForm(new { Action = "CreateFixture" }))
+        {
+            <div>
+                <input type="Hidden" name="Id" value="" />
+                <input name="Title" value=""  />
+                <input name="Date" value="" type="date" />
+                @Html.DropDownList("Sport.Id", new SelectList(ViewModel.Sports, "Id", "Name"))
+                @Html.DropDownList("Competitor1.Id", new SelectList(ViewModel.Competitors, "Id", "Name"))
+                @Html.DropDownList("Competitor2.Id", new SelectList(ViewModel.Competitors, "Id", "Name"))
+            </div>
+            <div>
+                <input type="submit" value="Update" />
+            </div>
         }
     </div>
 </div>

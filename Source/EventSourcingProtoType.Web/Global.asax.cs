@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using EventSourcingProtoType.Messages;
-using EventSourcingProtoType.Web.Models;
+using EventSourcingProtoType.Messages.Commands;
 using Rebus.Activation;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
@@ -11,7 +10,6 @@ namespace EventSourcingProtoType.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static List<Sport> Sports = new List<Sport>();
         public static BuiltinHandlerActivator Activator;
 
         protected void Application_Start()

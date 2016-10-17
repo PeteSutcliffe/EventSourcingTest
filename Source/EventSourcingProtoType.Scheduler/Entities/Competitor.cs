@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EventSourcingProtoType.Messages.Events;
 using EventSourcingProtoType.Scheduler.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities

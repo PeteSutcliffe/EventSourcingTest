@@ -26,9 +26,9 @@ namespace EventSourcingProtoType.Scheduler.Entities
             var competitor1 = getCompetitor(competitor1Id);
             var competitor2 = getCompetitor(competitor2Id);
 
-            sport.AddFixture(Id, _title);
-            competitor1.AddFixture(Id, _title);
-            competitor2.AddFixture(Id, _title);
+            sport.AddFixture(id, _title);
+            competitor1.AddFixture(id, _title);
+            competitor2.AddFixture(id, _title);
             ApplyChange(new FixtureCreated(id, title, date, sportId, competitor1Id, competitor2Id));
         }
 

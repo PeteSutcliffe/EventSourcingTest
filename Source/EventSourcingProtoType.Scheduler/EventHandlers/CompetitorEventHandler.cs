@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EventSourcingProtoType.Messages.Events;
 using EventSourcingProtoType.Scheduler.Events;
 using Rebus.Handlers;
 

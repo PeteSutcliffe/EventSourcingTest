@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EventSourcingProtoType.Messages.Events;
 using EventSourcingProtoType.Scheduler.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities
@@ -28,7 +29,7 @@ namespace EventSourcingProtoType.Scheduler.Entities
 
         public void AddFixture(Guid fixtureId, string title)
         {
-            ApplyChange(new CompetitorAddedToFixture(Id, fixtureId, title));
+            ApplyChange(new SportAddedToFixture(Id, fixtureId, title));
         }
 
         public void RemoveFixture(Guid fixtureId)

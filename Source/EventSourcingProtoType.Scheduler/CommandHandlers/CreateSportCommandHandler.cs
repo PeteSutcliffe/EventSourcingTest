@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using EventSourcingProtoType.Messages;
+using EventSourcingProtoType.Messages.Commands;
 using EventSourcingProtoType.Scheduler.Entities;
 using Rebus.Handlers;
 
@@ -15,13 +15,14 @@ namespace EventSourcingProtoType.Scheduler.CommandHandlers
             _uow = uow;
         }
 
-        public async Task Handle(CreateSportCommand createSportCommand)
+        public Task Handle(CreateSportCommand createSportCommand)
         {
             var sport = new Sport(createSportCommand.Id, createSportCommand.Name);
             _uow.Add(sport);
             _uow.Commit();
 
             Console.WriteLine($"Created {createSportCommand.Id} : {createSportCommand.Name}");
+            return Task.CompletedTask;
         }
     }
 }

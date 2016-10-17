@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace EventSourcingProtoType.Messages
+namespace EventSourcingProtoType.Messages.Commands
 {
-    public class UpdateSportCommand
+    public class CreateSportCommand
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }
 
-        public UpdateSportCommand(Guid id, string name)
+        public CreateSportCommand(Guid id, string name)
         {
             Id = id;
             Name = name;

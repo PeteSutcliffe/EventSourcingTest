@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventSourcingProtoType.Messages
+namespace EventSourcingProtoType.Messages.Commands
 {
     public class UpdateFixtureCommand
     {

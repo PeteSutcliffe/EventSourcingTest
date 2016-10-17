@@ -1,7 +1,7 @@
 ﻿using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using EventSourcingProtoType.Messages;
+using EventSourcingProtoType.Messages.Commands;
 using EventSourcingProtoType.Scheduler.CommandHandlers;
 using Rebus.Bus;
 using Rebus.Config;
@@ -27,29 +27,45 @@ namespace EventSourcingProtoType.Scheduler
 
         private static IWindsorContainer Bootstrap()
         {
-            return new WindsorContainer()
+            var windsorContainer = new WindsorContainer()
                 .Register(
-                    //Component.For<IHandleMessages<CreateSportCommand>>()
-                    //.ImplementedBy<CreateSportCommandHandler>()
-                    //.LifestyleTransient(),
+                    //why does this only register event handlers???
+                    Types.FromAssemblyInThisApplication()
+                        .Where(t => typeof (IHandleMessages).IsAssignableFrom(t))
+                        .WithServiceAllInterfaces()
+                        .LifestyleTransient(),
 
-                    Classes.FromAssemblyInThisApplication()
-                    .InNamespace("EventSourcingProtoType.Scheduler.CommandHandlers")
-                    .WithServiceAllInterfaces()
-                    .LifestyleTransient(),
+                    Component.For<IHandleMessages<CreateSportCommand>>()
+                        .ImplementedBy<CreateSportCommandHandler>()
+                        .LifestyleTransient(),
 
-                    //Classes.FromThisAssembly()
-                    //.InNamespace("EventSourcingProtoType.Scheduler.EventHandlers")
-                    //.WithServiceAllInterfaces()
-                    //.LifestyleTransient(),
+                    Component.For<IHandleMessages<CreateFixtureCommand>>()
+                        .ImplementedBy<CreateFixtureCommandHandler>()
+                        .LifestyleTransient(),
+
+                    Component.For<IHandleMessages<CreateCompetitorCommand>>()
+                        .ImplementedBy<CreateCompetitorCommandHandler>()
+                        .LifestyleTransient(),
+
+                    Component.For<IHandleMessages<UpdateSportCommand>>()
+                        .ImplementedBy<UpdateSportCommandHandler>()
+                        .LifestyleTransient(),
+
+                    Component.For<IHandleMessages<UpdateCompetitorCommand>>()
+                        .ImplementedBy<UpdateCompetitorCommandHandler>()
+                        .LifestyleTransient(),
+
+                    Component.For<IHandleMessages<UpdateFixtureCommand>>()
+                        .ImplementedBy<UpdateFixtureCommandHandler>()
+                        .LifestyleTransient(),
 
                     Component.For<IRepositoryFactory>()
                         .ImplementedBy<RepositoryFactory>()
                         .LifestyleTransient(),
 
                     Component.For<IUnitOfWork>()
-                    .ImplementedBy<UnitOfWork>()
-                    .LifestyleTransient(),
+                        .ImplementedBy<UnitOfWork>()
+                        .LifestyleTransient(),
 
                     Component.For<IEventStore>()
                         .ImplementedBy<EventStore>()
@@ -58,6 +74,7 @@ namespace EventSourcingProtoType.Scheduler
                     Component.For<IEventPublisher>()
                         .ImplementedBy<EventPublisher>()
                         .LifestyleTransient());
+            return windsorContainer;
         }
     }
 }

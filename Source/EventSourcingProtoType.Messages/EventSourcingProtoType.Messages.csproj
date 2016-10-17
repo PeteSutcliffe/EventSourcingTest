@@ -40,13 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateCompetitorCommand.cs" />
-    <Compile Include="CreateFixtureCommand.cs" />
-    <Compile Include="CreateSportCommand.cs" />
+    <Compile Include="Commands\CreateCompetitorCommand.cs" />
+    <Compile Include="Commands\CreateFixtureCommand.cs" />
+    <Compile Include="Commands\CreateSportCommand.cs" />
+    <Compile Include="Events\CompetitorAddedToFixture.cs" />
+    <Compile Include="Events\CompetitorCreated.cs" />
+    <Compile Include="Events\CompetitorNameChanged.cs" />
+    <Compile Include="Events\CompetitorRemovedFromFixture.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\FixtureCompetitor1Changed.cs" />
+    <Compile Include="Events\FixtureCompetitor2Changed.cs" />
+    <Compile Include="Events\FixtureCreated.cs" />
+    <Compile Include="Events\FixtureDateChanged.cs" />
+    <Compile Include="Events\FixtureSportChanged.cs" />
+    <Compile Include="Events\FixtureTitleChanged.cs" />
+    <Compile Include="Events\SportAddedToFixture.cs" />
+    <Compile Include="Events\SportCreated.cs" />
+    <Compile Include="Events\SportNameChanged.cs" />
+    <Compile Include="Events\SportRemovedFromFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdateCompetitorCommand.cs" />
-    <Compile Include="UpdateFixtureCommand.cs" />
-    <Compile Include="UpdateSportCommand.cs" />
+    <Compile Include="Commands\UpdateCompetitorCommand.cs" />
+    <Compile Include="Commands\UpdateFixtureCommand.cs" />
+    <Compile Include="Commands\UpdateSportCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

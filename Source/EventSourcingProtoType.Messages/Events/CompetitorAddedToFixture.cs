@@ -1,6 +1,7 @@
 ﻿using System;
+using EventSourcingProtoType.Scheduler.Events;
 
-namespace EventSourcingProtoType.Scheduler.Events
+namespace EventSourcingProtoType.Messages.Events
 {
     public class CompetitorAddedToFixture : Event
     {
