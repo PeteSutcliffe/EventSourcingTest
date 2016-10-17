@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MongoDB.Driver;
 
 namespace EventSourcingProtoType.Scheduler.Dtos
@@ -15,6 +16,12 @@ namespace EventSourcingProtoType.Scheduler.Dtos
             var settings = MongoClientSettings.FromUrl(connstringBuilder.ToMongoUrl());
             var client = new MongoClient(settings);
             Database = client.GetDatabase("Dtos");
+        }
+
+        public T Get<T>(Guid id) where T : Dto
+        {
+            var collection = Database.GetCollection<T>(typeof(T).Name);
+            return collection.AsQueryable().SingleOrDefault(a => a.Id == id);
         }
 
         public void Add<T>(T item)

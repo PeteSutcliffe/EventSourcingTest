@@ -22,7 +22,7 @@ namespace EventSourcingProtoType.Scheduler.EventHandlers
         public Task Handle(SportCreated sport)
         {
             _repository.Add(new SportDto { Id = sport.Id, Name = sport.Name});
-            Console.WriteLine($"Handled created event {sport.Id}:{sport.Name}");
+            Console.WriteLine($"Handled fixture created event {sport.Id}:{sport.Name}");
             return Task.CompletedTask;
         }
 
@@ -31,7 +31,7 @@ namespace EventSourcingProtoType.Scheduler.EventHandlers
             var updateBuilder = new UpdateDefinitionBuilder<SportDto>();
 
             _repository.Update(message.Id, updateBuilder.Set(s => s.Name, message.Name));
-            Console.WriteLine($"Handled name changed event {message.Id}:{message.Name}");
+            Console.WriteLine($"Handled fixture name changed event {message.Id}:{message.Name}");
             return Task.CompletedTask;
         }
 
