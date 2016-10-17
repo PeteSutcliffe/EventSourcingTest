@@ -79,20 +79,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateRoot.cs" />
+    <Compile Include="CommandHandlers\CreateCompetitorCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateFixtureCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateSportCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UpdateCompetitorCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UpdateFixtureCommandHandler.cs" />
     <Compile Include="CommandHandlers\UpdateSportCommandHandler.cs" />
-    <Compile Include="CreateSportCommandHandler.cs" />
     <Compile Include="Dtos\DtoRepository.cs" />
     <Compile Include="Dtos\SportDto.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="Entities\AggregateRoot.cs" />
+    <Compile Include="Entities\Competitor.cs" />
+    <Compile Include="Entities\Fixture.cs" />
+    <Compile Include="Entities\Sport.cs" />
+    <Compile Include="EventHandlers\CompetitorEventHandler.cs" />
+    <Compile Include="EventHandlers\FixtureEventHandler.cs" />
     <Compile Include="EventHandlers\SportCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\SportUpdatedEventHandler.cs" />
+    <Compile Include="Events\CompetitorAddedToFixture.cs" />
+    <Compile Include="Events\CompetitorCreated.cs" />
+    <Compile Include="Events\CompetitorNameChanged.cs" />
+    <Compile Include="Events\CompetitorRemovedFromFixture.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\FixtureCompetitor1Changed.cs" />
+    <Compile Include="Events\FixtureCompetitor2Changed.cs" />
+    <Compile Include="Events\FixtureCreated.cs" />
+    <Compile Include="Events\FixtureDateChanged.cs" />
+    <Compile Include="Events\FixtureSportChanged.cs" />
+    <Compile Include="Events\FixtureTitleChanged.cs" />
+    <Compile Include="Events\SportAddedToFixture.cs" />
+    <Compile Include="Events\SportCreated.cs" />
+    <Compile Include="Events\SportNameChanged.cs" />
+    <Compile Include="Events\SportRemovedFromFixture.cs" />
     <Compile Include="IEventPublisher.cs" />
     <Compile Include="IEventStore.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Sport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

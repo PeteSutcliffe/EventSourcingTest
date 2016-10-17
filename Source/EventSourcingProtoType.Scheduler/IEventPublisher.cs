@@ -1,4 +1,6 @@
-﻿namespace EventSourcingProtoType.Scheduler
+﻿using EventSourcingProtoType.Scheduler.Events;
+
+namespace EventSourcingProtoType.Scheduler
 {
     public interface IEventPublisher
     {

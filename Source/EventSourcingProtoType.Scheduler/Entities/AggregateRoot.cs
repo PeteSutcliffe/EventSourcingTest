@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using EventSourcingProtoType.Scheduler.Events;
 
-namespace EventSourcingProtoType.Scheduler
+namespace EventSourcingProtoType.Scheduler.Entities
 {
     public abstract class AggregateRoot
     {

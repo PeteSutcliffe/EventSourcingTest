@@ -1,25 +1,27 @@
 using System;
 using System.Threading.Tasks;
 using EventSourcingProtoType.Messages;
+using EventSourcingProtoType.Scheduler.Entities;
 using Rebus.Handlers;
 
-namespace EventSourcingProtoType.Scheduler
+namespace EventSourcingProtoType.Scheduler.CommandHandlers
 {
     internal class CreateSportCommandHandler : IHandleMessages<CreateSportCommand>
     {
-        private readonly IRepository<Sport> _sportRepository;
+        private readonly IUnitOfWork _uow;
 
-        public CreateSportCommandHandler(IRepository<Sport> sportRepository)
+        public CreateSportCommandHandler(IUnitOfWork uow)
         {
-            _sportRepository = sportRepository;
+            _uow = uow;
         }
 
-        public Task Handle(CreateSportCommand createSportCommand)
+        public async Task Handle(CreateSportCommand createSportCommand)
         {
             var sport = new Sport(createSportCommand.Id, createSportCommand.Name);
+            _uow.Add(sport);
+            _uow.Commit();
+
             Console.WriteLine($"Created {createSportCommand.Id} : {createSportCommand.Name}");
-            _sportRepository.Save(sport, -1);
-            return Task.CompletedTask;
         }
     }
 }

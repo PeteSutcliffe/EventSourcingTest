@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EventSourcingProtoType.Scheduler.Dtos;
+using EventSourcingProtoType.Scheduler.Events;
 using Rebus.Handlers;
 
 namespace EventSourcingProtoType.Scheduler.EventHandlers
