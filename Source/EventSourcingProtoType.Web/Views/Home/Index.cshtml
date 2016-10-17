@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EventSourcingProtoType.Web.Models.Sport>
+@{
+    Layout = null;
+}
+
+<head>
+    <Title>Test</Title>
+    <style>
+        .table { display: table; } 
+        .table>* { display: table-row; }
+        .table>*>* { display: table-cell; }
+    </style>
+</head>
+<div>
+    <div class="table">
+        @foreach (var sport in Model)
+        {
+            using (@Html.BeginForm(new { Action = "UpdateSport" }))
+            {
+                <div><input name="Name" value="@sport.Name" /><input type="Hidden" name="Id" value="@sport.Id" /></div>
+                <div><input type="submit" value="Update"/></div>
+            }
+        }
+        @using (@Html.BeginForm(new { Action = "CreateSport"}))
+        {
+        <div><input name="Name" value="" /></div>
+        <div><input type="submit" value="Create" /></div>
+        }
+    </div>
+</div>
