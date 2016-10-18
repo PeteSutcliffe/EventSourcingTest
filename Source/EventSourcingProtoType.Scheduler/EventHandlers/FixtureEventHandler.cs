@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EventSourcingProtoType.Messages.Events;
 using EventSourcingProtoType.Scheduler.Dtos;
-using EventSourcingProtoType.Scheduler.Events;
 using Rebus.Handlers;
 
 namespace EventSourcingProtoType.Scheduler.EventHandlers
@@ -26,8 +26,8 @@ namespace EventSourcingProtoType.Scheduler.EventHandlers
             var competitor2 = _repository.Get<CompetitorDto>(message.Competitor2);
             var sport = _repository.Get<SportDto>(message.SportId);
 
-            _repository.Add(new FixtureDto { Id = message.Id, Title = message.Title, Sport = sport, Competitor1 = competitor1, Competitor2 = competitor2});
-            Console.WriteLine($"Handled fixture created event {message.Id}:{message.Title}");
+            _repository.Add(new FixtureDto { Id = message.AggregateId, Title = message.Title, Sport = sport, Competitor1 = competitor1, Competitor2 = competitor2});
+            Console.WriteLine($"Handled fixture created event {message.AggregateId}:{message.Title}");
         }
 
         public async Task Handle(FixtureCompetitor1Changed message)

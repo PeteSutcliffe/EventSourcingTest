@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using EventSourcingProtoType.Messages.Events;
-using EventSourcingProtoType.Scheduler.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities
 {
@@ -39,7 +38,7 @@ namespace EventSourcingProtoType.Scheduler.Entities
 
         protected void Apply(SportCreated ev)
         {
-            Id = ev.Id;
+            Id = ev.AggregateId;
             _name = ev.Name;
         }
 
@@ -50,7 +49,7 @@ namespace EventSourcingProtoType.Scheduler.Entities
 
         protected void Apply(SportAddedToFixture ev)
         {
-            _fixtures.Add(ev.SportId, ev.Title);
+            _fixtures.Add(ev.AggregateId, ev.Title);
         }
 
         protected void Apply(SportRemovedFromFixture ev)

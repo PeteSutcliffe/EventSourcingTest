@@ -11,7 +11,7 @@ namespace EventSourcingProtoType.Scheduler
         void Commit();
     }
 
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly IRepositoryFactory _factory;
         private readonly IEventStore _eventStore;

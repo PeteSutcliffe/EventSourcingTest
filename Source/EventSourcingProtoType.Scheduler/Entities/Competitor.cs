@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using EventSourcingProtoType.Messages.Events;
-using EventSourcingProtoType.Scheduler.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities
 {
@@ -39,7 +38,7 @@ namespace EventSourcingProtoType.Scheduler.Entities
 
         protected void Apply(CompetitorCreated ev)
         {
-            Id = ev.Id;
+            Id = ev.AggregateId;
             _name = ev.Name;
         }
 

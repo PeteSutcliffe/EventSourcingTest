@@ -1,15 +1,14 @@
 using System;
 
-namespace EventSourcingProtoType.Scheduler.Events
+namespace EventSourcingProtoType.Messages.Events
 {
-    public class SportNameChanged : Event
+    public class SportNameChanged : DomainEvent
     {
         public string Name { get; set; }
-        public Guid Id { get; set; }
 
-        public SportNameChanged(Guid id, string name)
+        public SportNameChanged(Guid aggregateId, string name)
         {
-            Id = id;
+            AggregateId = aggregateId;
             Name = name;
         }
 

@@ -7,7 +7,7 @@ using Rebus.Handlers;
 
 namespace EventSourcingProtoType.Scheduler.CommandHandlers
 {
-    internal class CreateFixtureCommandHandler : IHandleMessages<CreateFixtureCommand>
+    public class CreateFixtureCommandHandler : IHandleMessages<CreateFixtureCommand>
     {
         private readonly IUnitOfWork _uow;
 

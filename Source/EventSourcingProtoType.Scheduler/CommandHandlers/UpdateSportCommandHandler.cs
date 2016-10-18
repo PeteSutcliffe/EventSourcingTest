@@ -7,7 +7,7 @@ using Rebus.Handlers;
 
 namespace EventSourcingProtoType.Scheduler.CommandHandlers
 {
-    internal class UpdateSportCommandHandler : IHandleMessages<UpdateSportCommand>
+    public class UpdateSportCommandHandler : IHandleMessages<UpdateSportCommand>
     {
         private readonly IUnitOfWork _uow;
 

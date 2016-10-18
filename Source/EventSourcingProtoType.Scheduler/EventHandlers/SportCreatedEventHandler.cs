@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EventSourcingProtoType.Messages.Events;
 using EventSourcingProtoType.Scheduler.Dtos;
-using EventSourcingProtoType.Scheduler.Events;
 using MongoDB.Driver;
 using Rebus.Handlers;
 
@@ -21,8 +21,8 @@ namespace EventSourcingProtoType.Scheduler.EventHandlers
 
         public Task Handle(SportCreated sport)
         {
-            _repository.Add(new SportDto { Id = sport.Id, Name = sport.Name});
-            Console.WriteLine($"Handled fixture created event {sport.Id}:{sport.Name}");
+            _repository.Add(new SportDto { Id = sport.AggregateId, Name = sport.Name});
+            Console.WriteLine($"Handled fixture created event {sport.AggregateId}:{sport.Name}");
             return Task.CompletedTask;
         }
 
@@ -30,8 +30,8 @@ namespace EventSourcingProtoType.Scheduler.EventHandlers
         {
             var updateBuilder = new UpdateDefinitionBuilder<SportDto>();
 
-            _repository.Update(message.Id, updateBuilder.Set(s => s.Name, message.Name));
-            Console.WriteLine($"Handled fixture name changed event {message.Id}:{message.Name}");
+            _repository.Update(message.AggregateId, updateBuilder.Set(s => s.Name, message.Name));
+            Console.WriteLine($"Handled fixture name changed event {message.AggregateId}:{message.Name}");
             return Task.CompletedTask;
         }
 

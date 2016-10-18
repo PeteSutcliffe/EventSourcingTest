@@ -1,9 +1,8 @@
 ﻿using System;
-using EventSourcingProtoType.Scheduler.Events;
 
 namespace EventSourcingProtoType.Messages.Events
 {
-    public class CompetitorAddedToFixture : Event
+    public class CompetitorAddedToFixture : DomainEvent
     {
         public Guid CompetitorId { get; private set; }
         public Guid FixtureId { get; private set; }

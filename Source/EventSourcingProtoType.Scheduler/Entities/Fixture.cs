@@ -1,5 +1,5 @@
 using System;
-using EventSourcingProtoType.Scheduler.Events;
+using EventSourcingProtoType.Messages.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities
 {
@@ -76,7 +76,7 @@ namespace EventSourcingProtoType.Scheduler.Entities
 
         protected void Apply(FixtureCreated ev)
         {
-            Id = ev.Id;
+            Id = ev.AggregateId;
             _title = ev.Title;
             _date = ev.Date;
             _sportId = ev.SportId;

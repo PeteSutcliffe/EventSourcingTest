@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using EventSourcingProtoType.Scheduler.Events;
+using EventSourcingProtoType.Messages.Events;
 
 namespace EventSourcingProtoType.Scheduler.Entities
 {
     public abstract class AggregateRoot
     {
-        private readonly List<Event> _changes = new List<Event>();
+        private readonly List<DomainEvent> _changes = new List<DomainEvent>();
 
         public abstract Guid Id { get; protected set; }
         public int Version { get; internal set; }
 
-        public IEnumerable<Event> GetUncommittedChanges()
+        public IEnumerable<DomainEvent> GetUncommittedChanges()
         {
             return _changes;
         }
@@ -22,22 +22,22 @@ namespace EventSourcingProtoType.Scheduler.Entities
             _changes.Clear();
         }
 
-        public void LoadsFromHistory(IEnumerable<Event> history)
+        public void LoadsFromHistory(IEnumerable<DomainEvent> history)
         {
             foreach (var e in history) ApplyChange(e, false);
         }
 
-        protected void ApplyChange(Event @event)
+        protected void ApplyChange(DomainEvent domainEvent)
         {
-            ApplyChange(@event, true);
+            ApplyChange(domainEvent, true);
         }
 
-        private void ApplyChange(Event @event, bool isNew)
+        private void ApplyChange(DomainEvent domainEvent, bool isNew)
         {
-            var method = GetType().GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance, null, new[] {@event.GetType()}, null);
+            var method = GetType().GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance, null, new[] {domainEvent.GetType()}, null);
             if(method == null) throw new InvalidOperationException("Apply method not found");
-            method.Invoke(this, new[] {@event});
-            if (isNew) _changes.Add(@event);
+            method.Invoke(this, new[] {domainEvent});
+            if (isNew) _changes.Add(domainEvent);
         }
     }
 }

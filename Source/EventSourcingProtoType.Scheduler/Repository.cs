@@ -13,7 +13,7 @@ namespace EventSourcingProtoType.Scheduler
         IRepository<T> Create<T>() where T:AggregateRoot, new();
     }
 
-    internal class RepositoryFactory : IRepositoryFactory
+    public class RepositoryFactory : IRepositoryFactory
     {
         private readonly IEventStore _storage;
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EventSourcingProtoType.Scheduler.Events;
+using EventSourcingProtoType.Messages.Events;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -11,8 +11,8 @@ namespace EventSourcingProtoType.Scheduler
 {
     public interface IEventStore
     {
-        void SaveEvents(Guid aggregateId, IEnumerable<Event> events, int expectedVersion);
-        List<Event> GetEventsForAggregate(Guid aggregateId);
+        void SaveEvents(Guid aggregateId, IEnumerable<DomainEvent> events, int expectedVersion);
+        List<DomainEvent> GetEventsForAggregate(Guid aggregateId);
     }
 
     public class EventStore : IEventStore
@@ -49,7 +49,7 @@ namespace EventSourcingProtoType.Scheduler
         private static readonly IMongoDatabase Database;
         private readonly IMongoCollection<SavedEvent> _collection;
 
-        public void SaveEvents(Guid aggregateId, IEnumerable<Event> events, int expectedVersion)
+        public void SaveEvents(Guid aggregateId, IEnumerable<DomainEvent> events, int expectedVersion)
         {
             var lastEventVersion = _collection.AsQueryable()
                 .Where(c => c.AggegateId == aggregateId)
@@ -85,18 +85,18 @@ namespace EventSourcingProtoType.Scheduler
 
         // collect all processed events for given aggregate and return them as a list
         // used to build up an aggregate from its history (Domain.LoadsFromHistory)
-        public List<Event> GetEventsForAggregate(Guid aggregateId)
+        public List<DomainEvent> GetEventsForAggregate(Guid aggregateId)
         {
             var events = _collection.AsQueryable()
                 .Where(c => c.AggegateId == aggregateId)
                 .OrderBy(e => e.Version);
 
-            var retEvents = new List<Event>();
+            var retEvents = new List<DomainEvent>();
 
             foreach (var savedEvent in events)
             {
                 var t = Type.GetType(savedEvent.EventType, true);
-                var @event = (Event)JsonConvert.DeserializeObject(savedEvent.SerializedData, t);
+                var @event = (DomainEvent)JsonConvert.DeserializeObject(savedEvent.SerializedData, t);
                 retEvents.Add(@event);
             }
 
