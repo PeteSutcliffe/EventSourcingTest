@@ -24,6 +24,12 @@ namespace EventSourcingProtoType.Scheduler.Dtos
             return collection.AsQueryable().SingleOrDefault(a => a.Id == id);
         }
 
+        public IQueryable<T> AsQueryable<T>()
+        {
+            var collection = Database.GetCollection<T>(typeof(T).Name);
+            return collection.AsQueryable();
+        } 
+
         public void Add<T>(T item)
         {
             var collection = Database.GetCollection<T>(typeof (T).Name);
@@ -34,6 +40,12 @@ namespace EventSourcingProtoType.Scheduler.Dtos
         {
             var collection = Database.GetCollection<T>(typeof(T).Name);
             collection.UpdateOne(i => i.Id == id, updateDef);
+        }
+
+        public void Upsert<T>(T item) where T:Dto
+        {
+            var collection = Database.GetCollection<T>(typeof(T).Name);
+            collection.ReplaceOne(i => i.Id == item.Id, item, new UpdateOptions() { IsUpsert = true });
         }
     }
 }

@@ -78,7 +78,7 @@
                 <div>
                     <input type="Hidden" name="Id" value="@fixture.Id" />
                     <input name="Title" value="@fixture.Title"/>
-                    <input name="Date" value="@fixture.Date"/>
+                    <input name="Date" value="@fixture.Date" type="date"/>
                     @Html.DropDownList("Sport", new SelectList(ViewModel.Sports, "Id", "Name", ViewModel.Sports.Single(s => s.Id == fixture.Sport.Id)))
                     @Html.DropDownList("Competitor1", new SelectList(ViewModel.Competitors, "Id", "Name", ViewModel.Competitors.Single(s => s.Id == fixture.Competitor1.Id).Id))
                     @Html.DropDownList("Competitor2", new SelectList(ViewModel.Competitors, "Id", "Name", ViewModel.Competitors.Single(s => s.Id == fixture.Competitor2.Id).Id))
@@ -99,7 +99,7 @@
                 @Html.DropDownList("Competitor2.Id", new SelectList(ViewModel.Competitors, "Id", "Name"))
             </div>
             <div>
-                <input type="submit" value="Update" />
+                <input type="submit" value="Create" />
             </div>
         }
     </div>

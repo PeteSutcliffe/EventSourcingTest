@@ -35,29 +35,29 @@ namespace EventSourcingProtoType.Scheduler
                         .WithServiceAllInterfaces()
                         .LifestyleTransient(),
 
-                    Component.For<IHandleMessages<CreateSportCommand>>()
-                        .ImplementedBy<CreateSportCommandHandler>()
-                        .LifestyleTransient(),
+                    //Component.For<IHandleMessages<CreateSportCommand>>()
+                    //    .ImplementedBy<CreateSportCommandHandler>()
+                    //    .LifestyleTransient(),
 
-                    Component.For<IHandleMessages<CreateFixtureCommand>>()
-                        .ImplementedBy<CreateFixtureCommandHandler>()
-                        .LifestyleTransient(),
+                    //Component.For<IHandleMessages<CreateFixtureCommand>>()
+                    //    .ImplementedBy<CreateFixtureCommandHandler>()
+                    //    .LifestyleTransient(),
 
                     Component.For<IHandleMessages<CreateCompetitorCommand>>()
                         .ImplementedBy<CreateCompetitorCommandHandler>()
                         .LifestyleTransient(),
 
-                    Component.For<IHandleMessages<UpdateSportCommand>>()
-                        .ImplementedBy<UpdateSportCommandHandler>()
-                        .LifestyleTransient(),
+                    //Component.For<IHandleMessages<UpdateSportCommand>>()
+                    //    .ImplementedBy<UpdateSportCommandHandler>()
+                    //    .LifestyleTransient(),
 
                     Component.For<IHandleMessages<UpdateCompetitorCommand>>()
                         .ImplementedBy<UpdateCompetitorCommandHandler>()
                         .LifestyleTransient(),
 
-                    Component.For<IHandleMessages<UpdateFixtureCommand>>()
-                        .ImplementedBy<UpdateFixtureCommandHandler>()
-                        .LifestyleTransient(),
+                    //Component.For<IHandleMessages<UpdateFixtureCommand>>()
+                    //    .ImplementedBy<UpdateFixtureCommandHandler>()
+                    //    .LifestyleTransient(),
 
                     Component.For<IRepositoryFactory>()
                         .ImplementedBy<RepositoryFactory>()

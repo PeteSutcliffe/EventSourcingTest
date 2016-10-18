@@ -86,10 +86,12 @@
     <Compile Include="CommandHandlers\UpdateFixtureCommandHandler.cs" />
     <Compile Include="CommandHandlers\UpdateSportCommandHandler.cs" />
     <Compile Include="Dtos\CompetitorDto.cs" />
+    <Compile Include="Dtos\CompetitorToFixtureMapDto.cs" />
     <Compile Include="Dtos\Dto.cs" />
     <Compile Include="Dtos\DtoRepository.cs" />
     <Compile Include="Dtos\FixtureDto.cs" />
     <Compile Include="Dtos\SportDto.cs" />
+    <Compile Include="Dtos\SportToFixtureMapDto.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Competitor.cs" />
     <Compile Include="Entities\Fixture.cs" />
